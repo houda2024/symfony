@@ -1,0 +1,38 @@
+security:
+    # Activer la sécurité
+    enabled: true
+
+    # Utiliser l'entité User comme provider d'utilisateurs
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+
+    # Définir les règles d'accès aux différentes routes
+    access_control:
+        # Toutes les routes sont accessibles en mode non authentifié
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/inscription, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # Toutes les routes commençant par /admin sont accessibles en mode authentifié avec le rôle ROLE_ADMIN
+        - { path: ^/admin, roles: ROLE_ADMIN }
+
+    # Définir les formulaires de connexion et d'inscription
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+            provider: app_user_provider
+            form_login:
+                login_path: security_login
+                check_path: security_login_check
+                default_target_path: homepage
+            logout:
+                path: security_logout
+                target: security_login
+    encoders:
+        App\Entity\User:
+            algorithm: auto

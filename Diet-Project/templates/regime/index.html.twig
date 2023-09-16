@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <h1>Liste des régimes</h1>
+  <ul>
+    {% for regime in regimes %}
+      <li>{{ regime.nomRegime }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

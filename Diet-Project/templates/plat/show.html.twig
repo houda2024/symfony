@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <h1>Détails du plat</h1>
+  <p>Nom : {{ plat.nomPlat }}</p>
+  <p>Coût : {{ plat.cout }}</p>
+  <p>Nombre de calories : {{ plat.nbrCalories }}</p>
+  <p>Ingrédients : {{ plat.ingredients }}</p>
+{% endblock %}
